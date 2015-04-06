@@ -33,13 +33,13 @@ TEST_RUN_TARGETS:= $(addprefix run-, $(TEST_RUN_EXES))
 # =============================================================================
 # Descriptive Vars
 # =============================================================================
-NAME=foundation
+NAME=afin
 LICENSE="OSI Approved :: Apache Software License v2.0"
 AUTHOR="Afiniate, Inc."
 HOMEPAGE="https://github.com/afiniate/ddbi"
 
-DEV_REPO="git@github.com:afiniate/foundation.git"
-BUG_REPORTS="https://github.com/afiniate/foundation/issues"
+DEV_REPO="git@github.com:afiniate/afin.git"
+BUG_REPORTS="https://github.com/afiniate/afin/issues"
 
 DESC="Foundation code for Afiniate's libraries. Its probably useful for others too"
 
