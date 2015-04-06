@@ -44,7 +44,7 @@ BUG_REPORTS="https://github.com/afiniate/afin/issues"
 DESC="Foundation code for Afiniate's libraries. Its probably useful for others too"
 
 BUILD_DEPS=vrt oUnit
-DEPS=core async sexplib
+DEPS=core async sexplib core_extended
 
 # =============================================================================
 # Created Vars
