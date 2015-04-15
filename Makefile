@@ -15,7 +15,7 @@
 # VARS
 # =============================================================================
 BUILD_DIR := $(CURDIR)/_build
-LIB_DIR := $(BUILD_DIR)/src
+LIB_DIR := $(BUILD_DIR)/lib
 
 PREFIX := /usr
 
@@ -25,7 +25,7 @@ BUILD_FLAGS ?= -use-ocamlfind -cflags -bin-annot -lflags -g
 
 ### Test bits
 TESTS_DIR := $(BUILD_DIR)/tests
-TEST_RUN_SRCS := $(shell find $(CURDIR)/src -name "*_tests_run.ml")
+TEST_RUN_SRCS := $(shell find $(CURDIR)/lib -name "*_tests_run.ml")
 TEST_RUN_EXES := $(notdir $(TEST_RUN_SRCS:%.ml=%))
 TEST_RUN_CMDS := $(addprefix $(TESTS_DIR)/, $(TEST_RUN_EXES))
 TEST_RUN_TARGETS:= $(addprefix run-, $(TEST_RUN_EXES))
@@ -84,7 +84,7 @@ build:
 
 test:0
 	$(BUILD) $(NAME)_unit_tests_run.byte
-	$(BUILD_DIR)/src/$(NAME)_unit_tests_run.byte
+	$(BUILD_DIR)/lib/$(NAME)_unit_tests_run.byte
 
 metadata:
 	vrt prj make-opam \
