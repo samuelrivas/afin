@@ -15,7 +15,7 @@
 # VARS
 # =============================================================================
 BUILD_DIR := $(CURDIR)/_build
-LIB_DIR := $(BUILD_DIR)/src
+LIB_DIR := $(BUILD_DIR)/lib
 
 PREFIX := /usr
 
@@ -25,7 +25,7 @@ BUILD_FLAGS ?= -use-ocamlfind -cflags -bin-annot -lflags -g
 
 ### Test bits
 TESTS_DIR := $(BUILD_DIR)/tests
-TEST_RUN_SRCS := $(shell find $(CURDIR)/src -name "*_tests_run.ml")
+TEST_RUN_SRCS := $(shell find $(CURDIR)/lib -name "*_tests_run.ml")
 TEST_RUN_EXES := $(notdir $(TEST_RUN_SRCS:%.ml=%))
 TEST_RUN_CMDS := $(addprefix $(TESTS_DIR)/, $(TEST_RUN_EXES))
 TEST_RUN_TARGETS:= $(addprefix run-, $(TEST_RUN_EXES))
@@ -33,18 +33,18 @@ TEST_RUN_TARGETS:= $(addprefix run-, $(TEST_RUN_EXES))
 # =============================================================================
 # Descriptive Vars
 # =============================================================================
-NAME=foundation
+NAME=afin
 LICENSE="OSI Approved :: Apache Software License v2.0"
 AUTHOR="Afiniate, Inc."
 HOMEPAGE="https://github.com/afiniate/ddbi"
 
-DEV_REPO="git@github.com:afiniate/foundation.git"
-BUG_REPORTS="https://github.com/afiniate/foundation/issues"
+DEV_REPO="git@github.com:afiniate/afin.git"
+BUG_REPORTS="https://github.com/afiniate/afin/issues"
 
-DESC="Foundation code for Afiniate's libraries. Its probably useful for others too"
+DESC_FILE=$(CURDIR)/description
 
 BUILD_DEPS=vrt oUnit
-DEPS=core async sexplib
+DEPS=core async sexplib core_extended
 
 # =============================================================================
 # Created Vars
@@ -84,24 +84,14 @@ build:
 
 test:0
 	$(BUILD) $(NAME)_unit_tests_run.byte
-	$(BUILD_DIR)/src/$(NAME)_unit_tests_run.byte
+	$(BUILD_DIR)/lib/$(NAME)_unit_tests_run.byte
 
 metadata:
-	vrt prj make-opam \
-	--homepage $(HOMEPAGE) \
-	--dev-repo $(DEV_REPO) \
-	--lib-dir $(LIB_DIR) \
-	--license $(LICENSE) \
+	vrt prj make-meta \
+	--target-dir $(LIB_DIR) \
 	--name $(NAME) \
-	--author $(AUTHOR) \
-	--maintainer $(AUTHOR) \
-	--bug-reports $(BUG_REPORTS) \
-	--build-cmd "make" \
-	--install-cmd "make \"install\" \"PREFIX=%{prefix}%\"" \
-	--remove-cmd "make \"remove\" \"PREFIX=%{prefix}%\"" \
-	$(MOD_BUILD_DEPS)
 	$(MOD_DEPS) \
-	--desc $(DESC)
+	--description-file $(DESC_FILE)
 
 install:
 	cd $(LIB_DIR); ocamlfind install $(NAME) META $(NAME).cmi $(NAME).cmo $(NAME).o \
