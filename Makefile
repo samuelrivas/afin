@@ -41,7 +41,7 @@ HOMEPAGE="https://github.com/afiniate/ddbi"
 DEV_REPO="git@github.com:afiniate/afin.git"
 BUG_REPORTS="https://github.com/afiniate/afin/issues"
 
-DESC="Foundation code for Afiniate's libraries. Its probably useful for others too"
+DESC_FILE=$(CURDIR)/description
 
 BUILD_DEPS=vrt oUnit
 DEPS=core async sexplib core_extended
@@ -87,21 +87,11 @@ test:0
 	$(BUILD_DIR)/lib/$(NAME)_unit_tests_run.byte
 
 metadata:
-	vrt prj make-opam \
-	--homepage $(HOMEPAGE) \
-	--dev-repo $(DEV_REPO) \
-	--lib-dir $(LIB_DIR) \
-	--license $(LICENSE) \
+	vrt prj make-meta \
+	--target-dir $(LIB_DIR) \
 	--name $(NAME) \
-	--author $(AUTHOR) \
-	--maintainer $(AUTHOR) \
-	--bug-reports $(BUG_REPORTS) \
-	--build-cmd "make" \
-	--install-cmd "make \"install\" \"PREFIX=%{prefix}%\"" \
-	--remove-cmd "make \"remove\" \"PREFIX=%{prefix}%\"" \
-	$(MOD_BUILD_DEPS)
 	$(MOD_DEPS) \
-	--desc $(DESC)
+	--description-file $(DESC_FILE)
 
 install:
 	cd $(LIB_DIR); ocamlfind install $(NAME) META $(NAME).cmi $(NAME).cmo $(NAME).o \
