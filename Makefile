@@ -94,9 +94,11 @@ metadata:
 	--description-file $(DESC_FILE)
 
 install:
-	cd $(LIB_DIR); ocamlfind install $(NAME) META $(NAME).cmi $(NAME).cmo $(NAME).o \
-	                                           $(NAME).cmx $(NAME).a \
-	                                           $(NAME).cmxa
+	cd $(LIB_DIR); ocamlfind install $(NAME) META \
+	`find ./  -name "*.cmi" -o -name "*.cmo" -o -name "*.o" \
+	-o -name "*.cmx" -o -name "*.cmxa" -o -name "*.cmxs" -o \
+	-name "*.a" -o -name "*.cma" -o -name "*.mli"`
+
 
 remove:
 	ocamlfind remove $(NAME)
