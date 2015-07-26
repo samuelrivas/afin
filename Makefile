@@ -87,13 +87,13 @@ test:
 	$(BUILD_DIR)/lib/$(NAME)_unit_tests_run.byte
 
 metadata:
-	vrt prj make-meta \
+	vrt build make-meta \
 	--target-dir $(LIB_DIR) \
 	--name $(NAME) \
 	$(MOD_DEPS) \
 	--description-file $(DESC_FILE)
 
-install:
+install: build metadata
 	cd $(LIB_DIR); ocamlfind install $(NAME) META \
 	`find ./  -name "*.cmi" -o -name "*.cmo" -o -name "*.o" \
 	-o -name "*.cmx" -o -name "*.cmxa" -o -name "*.cmxs" -o \
