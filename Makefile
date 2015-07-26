@@ -82,7 +82,7 @@ build:
 	$(BUILD) $(NAME).cma $(NAME).cmx \
 	$(NAME).cmxa $(NAME).a $(NAME).cmxs
 
-test:0
+test:
 	$(BUILD) $(NAME)_unit_tests_run.byte
 	$(BUILD_DIR)/lib/$(NAME)_unit_tests_run.byte
 
