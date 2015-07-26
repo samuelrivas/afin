@@ -43,6 +43,10 @@ BUG_REPORTS="https://github.com/afiniate/afin/issues"
 
 DESC_FILE=$(CURDIR)/description
 
+# This has to be overridable as packaging tools usually work on an exported
+# source directory, not on a git repo
+SEMVER ?= $(shell vrt build semver)
+
 BUILD_DEPS=vrt oUnit
 DEPS=core async sexplib core_extended
 
@@ -91,7 +95,8 @@ metadata:
 	--target-dir $(LIB_DIR) \
 	--name $(NAME) \
 	$(MOD_DEPS) \
-	--description-file $(DESC_FILE)
+	--description-file $(DESC_FILE) \
+	--semver $(SEMVER)
 
 install: build metadata
 	cd $(LIB_DIR); ocamlfind install $(NAME) META \
