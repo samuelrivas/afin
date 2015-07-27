@@ -100,9 +100,9 @@ metadata:
 
 install: build metadata
 	cd $(LIB_DIR); ocamlfind install $(NAME) META \
-	`find ./  -name "*.cmi" -o -name "*.cmo" -o -name "*.o" \
+	$$(find ./  -name "*.cmi" -o -name "*.cmo" -o -name "*.o" \
 	-o -name "*.cmx" -o -name "*.cmxa" -o -name "*.cmxs" -o \
-	-name "*.a" -o -name "*.cma" -o -name "*.mli"`
+	-name "*.a" -o -name "*.cma" -o -name "*.mli" -o -name "*.cmt")
 
 
 remove:
